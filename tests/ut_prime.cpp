@@ -28,12 +28,12 @@ TEST(Prime, GenerateNBitPrime) {
 
 TEST(Prime, MillerRabin) {
     // false in trivial cases
-    ASSERT_FALSE(miller_rabin_test(1, 0.001));
-    ASSERT_FALSE(miller_rabin_test(4, 0.001));
+    ASSERT_FALSE(miller_rabin_test(1, 10));
+    ASSERT_FALSE(miller_rabin_test(4, 10));
 
     // true for prime numbers
-    ASSERT_TRUE(miller_rabin_test(2, 0.001));
-    ASSERT_TRUE(miller_rabin_test(3, 0.001));
-    ASSERT_TRUE(miller_rabin_test(97, 0.001));
-    ASSERT_TRUE(miller_rabin_test(2147483647, 0.001));
+    ASSERT_TRUE(miller_rabin_test(2, 10));
+    ASSERT_TRUE(miller_rabin_test(3, 10));
+    ASSERT_TRUE(miller_rabin_test(97, 10));
+    ASSERT_TRUE(miller_rabin_test(2147483647, 100));
 }

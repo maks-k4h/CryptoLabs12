@@ -6,6 +6,9 @@ bigint randint() {
     for (size_t b = 0; b < sizeof(bigint); ++b) {
         res += (rand() & 0xFF) << (8 * b);
     }
+    if (res < 0) {
+        return -res;
+    }
     return res;
 }
 

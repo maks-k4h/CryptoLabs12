@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 
 project(cryptolab LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -16,11 +17,15 @@ message(STATUS "GTest libraries: ${GTEST_LIBRARIES}")
 enable_testing()
 add_executable(
     cryptolab
-    lab1.cpp  # comment out to run test
+    ### comment out both to run tests
+    # lab1.cpp  
+    lab2.cpp
+    ###
     src/operations.cpp
     src/myrand.cpp
     src/prime.cpp
     src/format.cpp
+    src/rsa.cpp
     tests/ut_operations.cpp
     tests/ut_prime.cpp
 )
@@ -30,6 +35,6 @@ target_link_libraries(
     GTest::gtest_main
 )
 
-include(GoogleTest)
-gtest_discover_tests(cryptolab)
+# include(GoogleTest)
+# gtest_discover_tests(cryptolab)
 

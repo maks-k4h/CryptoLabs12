@@ -37,3 +37,12 @@ TEST(Operations, PowModLarge) {
     ASSERT_EQ(pow_mod(312412332, 232132143, 2324211), 702525);
     ASSERT_EQ(pow_mod(561852391, 120975819, 1096472), 591007);
 }
+
+TEST(Operations, ModularMultiplicativeInverse) {
+    ASSERT_EQ(mod_mul_inv(1, 2), 1);
+    ASSERT_EQ(mod_mul_inv(3, 2), 1);
+    ASSERT_EQ(mod_mul_inv(3, 26), 9);
+    ASSERT_EQ(mod_mul_inv(1422, 123521), 67841);
+    ASSERT_EQ(mod_mul_inv(125, 983), 810);
+    ASSERT_EQ(mod_mul_inv(1157839, 2157839), 674452);
+}
