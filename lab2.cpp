@@ -28,9 +28,8 @@ int main() {
     bigint decrypted_message = ctx.decrypt(ciphertext, pub, priv);
     std::cout << "Decrypted message: '" << decrypted_message << "'\n";
 
-
-    std::cout << std::endl;
     // compare RSA speed based relative to binary size of prime numbers
+    std::cout << std::endl;
     for (size_t nbits = 4; nbits < 17; ++nbits) {
 
         long long microseconds = 0;
@@ -53,5 +52,14 @@ int main() {
         }
         std::cout << "Mean duration for " << nbits << " bits is  " << microseconds / n << " nsec." << std::endl;
     }
+
+    // signing messages
+    std::cout << std::endl;
+    message = 123;
+    std::cout << "Alice is gonna sign message '" << message << "'\n";
+    auto signature = ctx.sign(message, pub, priv);
+    std::cout << "The signature is " << signature << "\n";
+    std::cout << "Bob verifies the signature with Alice's public key...\n";
+    std::cout << (ctx.verify(message, signature, pub) ? "Verified!" : "Unverified!") << "\n";
 
 }

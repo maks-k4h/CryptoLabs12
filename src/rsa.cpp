@@ -44,3 +44,22 @@ bigint RSA::encrypt(bigint message, const RSA::PublicKey& pub) {
 bigint RSA::decrypt(bigint ciphertext, const RSA::PublicKey& pub, const RSA::PrivateKey& priv) {
     return pow_mod(ciphertext, priv.d, pub.n);
 }
+
+bigint get_hash(bigint message, size_t bits = 16) {
+    // Rabin hash function
+    auto p1 = generate_prime(bits / 2);
+    auto p2 = generate_prime(bits / 2);
+    auto n = p1 * p2;
+    return pow_mod(message, 2, n);
+}
+
+bigint RSA::sign(bigint message, const RSA::PublicKey &pub, const RSA::PrivateKey &priv) {
+    bigint hash = get_hash(message);
+    return pow_mod(hash, priv.d, pub.n);
+}
+
+bool RSA::verify(bigint message, bigint signature, const RSA::PublicKey &pub) {
+    auto hash = get_hash(message);
+    auto dec_hash = pow_mod(signature, pub.e, pub.n);
+    return hash == dec_hash;
+}

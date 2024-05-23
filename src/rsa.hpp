@@ -29,6 +29,9 @@ public:
     bigint encrypt(bigint message, const PublicKey& pub);
     bigint decrypt(bigint ciphertext, const PublicKey& pub, const PrivateKey& priv);
 
+    bigint sign(bigint message, const PublicKey &pub, const PrivateKey &priv);
+    bool verify(bigint message, bigint signature, const PublicKey &pub);
+
 private:
     bigint nbits_;
 
