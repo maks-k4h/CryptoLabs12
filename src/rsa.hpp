@@ -22,10 +22,16 @@ public:
         operator std::string() { return std::string("PublicKey(p=") + as_base10(p) + ", q=" + as_base10(q) + ", d=" + as_base10(d) + ")"; }
     };
 
+    RSA(size_t nbits = 16);
+
     void generate_keys(PublicKey &pub, PrivateKey &priv);
 
     bigint encrypt(bigint message, const PublicKey& pub);
-    bigint decrypt(bigint cyphertext, const PublicKey& pub, const PrivateKey& priv);
+    bigint decrypt(bigint ciphertext, const PublicKey& pub, const PrivateKey& priv);
+
+private:
+    bigint nbits_;
+
 };
 
 

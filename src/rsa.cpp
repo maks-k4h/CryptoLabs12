@@ -4,17 +4,22 @@
 #include "operations.hpp"
 #include <numeric>
 
-#include <iostream>
+
+RSA::RSA(size_t nbits)
+: nbits_(nbits)
+{
+}
+
+
 void RSA::generate_keys(RSA::PublicKey &pub, RSA::PrivateKey &priv) {
-    auto nbits = 16;  
     auto criterion = [](bigint a) {
         return miller_rabin_test(a, 100);
     };
 
-    auto p = generate_prime(nbits, criterion);
+    auto p = generate_prime(nbits_, criterion);
     auto q = p;
     while (p == q) {
-        q = generate_prime(nbits, criterion);
+        q = generate_prime(nbits_, criterion);
     }
 
     auto carmichael_num = std::lcm(p - 1, q - 1);
